@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ErrorHandlerController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('index');
+//    if (backpack_user()) {
+//        $isAdmin = backpack_user()->is_admin;
+//
+//        return redirect($isAdmin ? backpack_url('dashboard') : );
+//    }
+//
+//    return redirect(backpack_url('login'));
+//});
+
+Route::get('/', [IndexController::class, 'index'])->name('index');
+
+Route::get('error/{error}', [ErrorHandlerController::class, 'returnError'])->name('error');
